@@ -18,11 +18,22 @@ test("shows success message on submit with form details", async () => {
     const submitButton = screen.getByRole('button');//select our submit button
     userEvent.click(submitButton);//simulate user clicking out button
 
-    
+    const firstName = screen.getByLabelText(/First Name/i);
+    userEvent.type(firstName, 'Luis');
+    const lastName = screen.getByLabelText(/Last Name/i);
+    userEvent.type(firstName, 'Dominguez');
+    const address = screen.getByLabelText(/Address/i);
+    userEvent.type(address,"11308 Wrigley Mansion Dr")
+    const city =  screen.getByLabelText(/City/i);
+    userEvent.type(city, "Charlotte");
+    const state = screen.getByLabelText(/State/i);
+    userEvent.type(state, "NC");
+    const zipCode = screen.getByLabelText(/Zip/i);
+    userEvent.type(zipCode, '2273');
+    //dont think selecting and typing was necessary in this case because the app was submiting a succes message regarless of form being filled out, but this way we know it does take in input from user typing in
+
 
     const success = await screen.findByTestId('successMessage')// this waits for user to click the submit button then finds the element with the test-id of successMessage as an attribute
-
-    
 
     //Assert: verify that said elements and events are working as expected
     expect(success).toBeInTheDocument();// this checks that the successmessage element is in the document
